@@ -96,11 +96,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Service\\CodeFactory.Service.csproj",
+      "projectUniqueName": "D:\\Code\\CodeFactory\\CodeFactory.Service\\CodeFactory.Service.csproj",
       "projectName": "CodeFactory.Service",
-      "projectPath": "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Service\\CodeFactory.Service.csproj",
+      "projectPath": "D:\\Code\\CodeFactory\\CodeFactory.Service\\CodeFactory.Service.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Service\\obj\\",
+      "outputPath": "D:\\Code\\CodeFactory\\CodeFactory.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -118,8 +118,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj": {
-              "projectPath": "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj"
+            "D:\\Code\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj": {
+              "projectPath": "D:\\Code\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj"
             }
           }
         }

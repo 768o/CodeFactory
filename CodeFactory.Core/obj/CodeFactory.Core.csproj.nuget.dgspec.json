@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj": {}
+    "D:\\Code\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj": {
+    "D:\\Code\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj",
+        "projectUniqueName": "D:\\Code\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj",
         "projectName": "CodeFactory.Core",
-        "projectPath": "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj",
+        "projectPath": "D:\\Code\\CodeFactory\\CodeFactory.Core\\CodeFactory.Core.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\source\\repos\\CodeFactory\\CodeFactory.Core\\obj\\",
+        "outputPath": "D:\\Code\\CodeFactory\\CodeFactory.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

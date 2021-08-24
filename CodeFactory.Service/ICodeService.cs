@@ -1,5 +1,4 @@
 ﻿using CodeFactory.Core.Model;
-using CodeFactory.Service.Dto;
 using Panda.DynamicWebApi;
 using Panda.DynamicWebApi.Attributes;
 using System;
@@ -17,7 +16,7 @@ namespace CodeFactory.Service
 
         Task<bool> DeleteCodePath(CodePath path);
 
-        Task<GetPathTreeDto> GetPathTree(CodePath path);
+        Task<CodePath> GetPathTree(CodePath path);
 
         Task<bool> CreateCodeInfo(CodeInfo info);
 

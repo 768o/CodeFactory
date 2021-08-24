@@ -1,5 +1,4 @@
 ﻿using CodeFactory.Core.Model;
-using CodeFactory.Service.Dto;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -53,9 +52,22 @@ namespace CodeFactory.Service
             return await Task.FromResult(CodeInfos.FirstOrDefault(d => d.Id == info.Id));
         }
 
-        public Task<GetPathTreeDto> GetPathTree(CodePath path)
+        public async Task<CodePath> GetPathTree(CodePath path)
         {
-            throw new NotImplementedException();
+            var parent = CodePaths.FirstOrDefault(d => d.ParentId == null);
+            return await Task.FromResult(parent);
+        }
+
+        private void GetPathTreeRecursion(CodePath parent) 
+        {
+            var childrens = CodePaths.Where(d => d.ParentId == parent.Id).ToList();
+            if (childrens.Any()) 
+            {
+                parent.Childrens = childrens;
+                parent.Childrens.ForEach(d => {
+                    GetPathTreeRecursion(d);
+                });
+            }
         }
 
         public async Task<bool> UpdateCodeInfo(CodeInfo info)

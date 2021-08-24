@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CodeFactory.Core.Model
 {
@@ -8,5 +9,7 @@ namespace CodeFactory.Core.Model
         public string Name { get; set; }
         public string FullPath { get; set; }
         public Guid? ParentId { get; set; }
+
+        public List<CodePath> Childrens { get; set; } = new List<CodePath>();
     }
 }
