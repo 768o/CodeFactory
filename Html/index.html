@@ -1,0 +1,211 @@
+<html>
+<head>
+<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap-theme.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/js/modal.min.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul id="breadcrumb" class="breadcrumb" style="margin-top:10px">
+			</ul>
+			<div class="row clearfix">
+				<div class="col-md-4 column">
+					<ul id="list-unstyled" class="list-unstyled">
+						<li>
+							<a>Lorem ipsum dolor sit amet</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-8 column">
+					<h2>
+						Heading
+					</h2>
+					<p>
+						Donec id elit non mi porta gravida at eget metus.
+					</p>
+					<p>
+						 <a class="btn" href="#">View details »</a>
+					</p>
+				</div>
+			</div>
+			
+			<div class="modal fade" id="modal-container-348295" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h4 class="modal-title" id="myModalLabel">
+							</h4>
+						</div>
+						<div class="modal-body">
+						    <form role="form">
+								<div class="form-group">
+									 <label for="InputName">Name</label><input type="text" class="form-control" id="InputName" />
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
+							 <button type="button" class="btn btn-primary" id="insertCodepath">保存</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    var host = "http://localhost:5000"
+	var childrens = [{id:"3fa85f64-5717-4562-b3fc-2c963f66afa6",name:"root",parentId:null}];
+	var breadcrumbs = [{id:"3fa85f64-5717-4562-b3fc-2c963f66afa6",name:"root",parentId:null}];
+	var codepath = [];
+	var codeinfo = {};
+	var type = 0;
+	
+	var insertCodepath = {};
+	var insertCodeinfo = {};
+	
+	$(function(){
+		SetBreadcrumbs(breadcrumbs);
+		SetChildrens();
+		
+		$("#modal-348295-2").click(function(){
+			insertCodeinfo = {};
+			insertCodeinfo.PathId = $(this).attr("value")
+			$("#myModalLabel").html("内容")
+			type = $(this).attr("type")
+		});
+		$("#insertCodepath").click(function(){
+			if(type == 1)
+			{
+				insertCodepath.name = $("#InputName").val();
+				$.ajax({
+					url: host + "/api/CodeService/CodePath",
+					type: "post",
+					dataType : "json",
+					contentType: 'application/json',
+					data: JSON.stringify(insertCodepath),
+					success: function(res) {
+						if(res){
+							$("#modal-container-348295").modal('hide');
+							$.get(host + "/api/CodeService/PathTree", function(res){
+								SetChildrens();
+								$("#InputName").val("");
+							});
+						}
+					}
+				});
+			}
+			if(type == 3)
+			{
+				insertCodepath.name = $("#InputName").val();
+				$.ajax({
+					url: host + "/api/CodeService/CodePath",
+					type: "put",
+					dataType : "json",
+					contentType: 'application/json',
+					data: JSON.stringify(insertCodepath),
+					success: function(res) {
+						if(res){
+							$("#modal-container-348295").modal('hide');
+							$.get(host + "/api/CodeService/PathTree", function(res){
+								SetChildrens();
+								$("#InputName").val("");
+							});
+						}
+					}
+				});
+			}
+		});
+	})
+	
+	function SetChildrens(){
+		var	id = breadcrumbs[breadcrumbs.length-1].id;
+
+		$.get(host + "/api/CodeService/PathTree?parentId=" + id, function(res){
+		    console.log(res.childrens)
+			var childrens = res.childrens
+			$("#list-unstyled").empty();
+			$(".editCodePath").unbind("click");
+			$(".deleteCodePath").unbind("click");
+			$(".enterCodePath").unbind("click");
+			for(var i = 0; i < childrens.length; i++)
+			{
+				var str = JSON.stringify(childrens[i]);
+				$("#list-unstyled").append("<li><a class='enterCodePath' href='#' value ='" + str + "'>" + childrens[i].name 
+					+ "</a><a class='editCodePath' href='#modal-container-348295' data-toggle='modal' type='3' href='#' style='margin-left:10px' value ='" + str + "' >" + "E" 
+					+ "</a><a class='deleteCodePath' type='5' href='#' style='margin-left:10px' value ='" + str + "' >" + "D" + "</a></li>")
+			}
+			$(".enterCodePath").click(function(){
+				insertCodepath = JSON.parse($(this).attr("value"));
+				breadcrumbs.push(insertCodepath)
+				SetBreadcrumbs(breadcrumbs)
+				SetChildrens()
+			});
+			$(".editCodePath").click(function(){
+				insertCodepath = JSON.parse($(this).attr("value"));
+				$("#InputName").val(insertCodepath.name);
+				$("#myModalLabel").html("目录")
+				type = $(this).attr("type")
+			});
+			$(".deleteCodePath").click(function(){
+				insertCodepath = JSON.parse($(this).attr("value"));
+				$.ajax({
+					url: host + "/api/CodeService/CodePath?id=" + insertCodepath.id,
+					type: "delete",
+					dataType : "json",
+					contentType: 'application/json',
+					success: function(res) {
+						if(res){
+							$.get(host + "/api/CodeService/PathTree", function(res){
+								SetChildrens();
+								$("#InputName").val("");
+							});
+						}
+					}
+				});
+			});
+		});
+	}
+	
+	function SetBreadcrumbs(breadcrumb){
+		$("#breadcrumb").empty();
+		$(".breadcrumbPath").unbind("click");
+		$("#modal-348295-1").unbind("click");
+		var j = 1; 
+		for(var i = 0; i < breadcrumb.length; i++)
+		{
+			if(i == breadcrumb.length - 1)
+			{
+				$("#breadcrumb").append("<li class='active'>" + breadcrumb[i].name + "</li>")
+				$("#breadcrumb").append("<li><a id='modal-348295-1' href='#modal-container-348295' data-toggle='modal' type='1' value='" + breadcrumbs[i].id + "'>P+</a></li>")
+				$("#breadcrumb").append("<li><a id='modal-348295-2' href='#modal-container-348295' data-toggle='modal' type='2' value='" + breadcrumbs[i].id + "'>F+</a></li>")
+				$("#modal-348295-1").click(function(){
+					console.log("222")
+					insertCodepath = {};
+					console.log($(this).attr("value"))
+					insertCodepath.ParentId = $(this).attr("value")
+					$("#myModalLabel").html("目录")
+					type = $(this).attr("type")
+				});
+			}
+			else{			
+				$("#breadcrumb").append("<li><a class='breadcrumbPath' index='" + j + "' href='#'>" + breadcrumb[i].name + "</a></li>")
+				j++;
+			}
+		}
+		$(".breadcrumbPath").click(function(){
+			console.log($(this).attr("index"))
+			breadcrumbs = breadcrumb.slice(0, $(this).attr("index"));
+			console.log("+" + JSON.stringify(breadcrumbs))
+			SetBreadcrumbs(breadcrumbs)
+			SetChildrens()
+		});
+	}
+</script>
+</body>
+</html>

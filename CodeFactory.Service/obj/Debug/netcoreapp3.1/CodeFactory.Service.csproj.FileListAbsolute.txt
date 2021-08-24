@@ -10,3 +10,15 @@ C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\ne
 C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.csproj.CopyComplete
 C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.dll
 C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.pdb
+D:\Code\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Service.deps.json
+D:\Code\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Service.dll
+D:\Code\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Service.pdb
+D:\Code\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Core.dll
+D:\Code\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Core.pdb
+D:\Code\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.csproj.AssemblyReference.cache
+D:\Code\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.AssemblyInfoInputs.cache
+D:\Code\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.AssemblyInfo.cs
+D:\Code\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.csproj.CoreCompileInputs.cache
+D:\Code\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.csproj.CopyComplete
+D:\Code\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.dll
+D:\Code\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.pdb

@@ -1,1 +1,76 @@
-[{"Id":"3fa85f64-5717-4562-b3fc-2c963f66afa6","Name":"string","FullPath":"string","ParentId":"3fa85f64-5717-4562-b3fc-2c963f66afa6"}]
+[
+  {
+    "Id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "Name": "string",
+    "ParentId": null,
+    
+    "Childrens": [
+      {
+        "Id": "23f1b806-c8d5-4ed6-9f46-2d3e9fc7ee4e",
+        "Name": "32122",
+        "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "Childrens": []
+      },
+      {
+        "Id": "deb39998-403b-4d1f-b89b-1d0c76a7f81a",
+        "Name": "21213",
+        "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "Childrens": []
+      },
+      {
+        "Id": "c2606105-eb74-4bb2-b4de-1105477b5942",
+        "Name": "32132",
+        "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "Childrens": []
+      },
+      {
+        "Id": "fcd288fb-db8f-458a-8180-9ac753c96e9b",
+        "Name": "1233213",
+        "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "Childrens": []
+      },
+      {
+        "Id": "61611e29-c8c1-4f20-ac50-a4b39d5eac86",
+        "Name": "8888",
+        "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "Childrens": []
+      }
+    ]
+  },
+  {
+    "Id": "23f1b806-c8d5-4ed6-9f46-2d3e9fc7ee4e",
+    "Name": "32122",
+    "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "Childrens": []
+  },
+  {
+    "Id": "deb39998-403b-4d1f-b89b-1d0c76a7f81a",
+    "Name": "21213",
+    "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "Childrens": []
+  },
+  {
+    "Id": "c2606105-eb74-4bb2-b4de-1105477b5942",
+    "Name": "32132",
+    "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "Childrens": []
+  },
+  {
+    "Id": "fcd288fb-db8f-458a-8180-9ac753c96e9b",
+    "Name": "1233213",
+    "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "Childrens": []
+  },
+  {
+    "Id": "61611e29-c8c1-4f20-ac50-a4b39d5eac86",
+    "Name": "8888",
+    "ParentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "Childrens": []
+  },
+  {
+    "Id": "0967d571-0ee7-4b90-b352-f0e51fae18f3",
+    "Name": "65465",
+    "ParentId": "23f1b806-c8d5-4ed6-9f46-2d3e9fc7ee4e",
+    "Childrens": []
+  }
+]

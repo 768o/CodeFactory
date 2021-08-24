@@ -54,7 +54,8 @@ namespace CodeFactory.Service
 
         public async Task<CodePath> GetPathTree(CodePath path)
         {
-            var parent = CodePaths.FirstOrDefault(d => d.ParentId == null);
+            var parent = CodePaths.FirstOrDefault(d => d.Id == path.ParentId);
+            GetPathTreeRecursion(parent);
             return await Task.FromResult(parent);
         }
 
@@ -86,7 +87,7 @@ namespace CodeFactory.Service
             CodePaths.ForEach(d => {
                 if (d.Id == path.Id)
                 {
-                    d = path;
+                    d.Name = path.Name;
                 }
             });
             return await Write(CodePaths);

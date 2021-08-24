@@ -6,3 +6,12 @@ C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\obj\Debug\netco
 C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.dll
 C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.pdb
+D:\Code\CodeFactory\CodeFactory.Core\bin\Debug\netcoreapp3.1\CodeFactory.Core.deps.json
+D:\Code\CodeFactory\CodeFactory.Core\bin\Debug\netcoreapp3.1\CodeFactory.Core.dll
+D:\Code\CodeFactory\CodeFactory.Core\bin\Debug\netcoreapp3.1\CodeFactory.Core.pdb
+D:\Code\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.csproj.AssemblyReference.cache
+D:\Code\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.AssemblyInfoInputs.cache
+D:\Code\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.AssemblyInfo.cs
+D:\Code\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.csproj.CoreCompileInputs.cache
+D:\Code\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.dll
+D:\Code\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.pdb
