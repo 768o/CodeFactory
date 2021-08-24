@@ -1,0 +1,12 @@
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Service.deps.json
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Service.dll
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Service.pdb
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Core.dll
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\bin\Debug\netcoreapp3.1\CodeFactory.Core.pdb
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.csproj.CopyComplete
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.dll
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Service\obj\Debug\netcoreapp3.1\CodeFactory.Service.pdb

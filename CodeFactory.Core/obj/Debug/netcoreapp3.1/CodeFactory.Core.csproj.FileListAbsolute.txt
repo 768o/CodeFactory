@@ -1,0 +1,8 @@
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\bin\Debug\netcoreapp3.1\CodeFactory.Core.deps.json
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\bin\Debug\netcoreapp3.1\CodeFactory.Core.dll
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\bin\Debug\netcoreapp3.1\CodeFactory.Core.pdb
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.dll
+C:\Users\Administrator\source\repos\CodeFactory\CodeFactory.Core\obj\Debug\netcoreapp3.1\CodeFactory.Core.pdb
