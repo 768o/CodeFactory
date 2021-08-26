@@ -8,6 +8,8 @@ namespace CodeFactory.Core.Model
 
         public Guid PathId { get; set; }
 
+        public string Title { get; set; }
+
         public string Context { get; set; }
     }
 }

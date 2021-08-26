@@ -12,7 +12,7 @@ namespace CodeFactory.Service
 {
     public class CodeService : ICodeService
     {
-        private readonly static string Path = Environment.CurrentDirectory + "//Data";
+        private readonly static string Path = Environment.CurrentDirectory + "\\Data";
         private static List<CodeInfo> CodeInfos { get; set; } = ReadJsonFileToList<CodeInfo>();
         private static List<CodePath> CodePaths { get; set; } = ReadJsonFileToList<CodePath>();
 
@@ -38,6 +38,10 @@ namespace CodeFactory.Service
 
         public async Task<bool> DeleteCodePath(CodePath path)
         {
+            if (CodePaths.Any(d => d.ParentId == path.Id) || CodeInfos.Any(d => d.PathId == path.Id)) 
+            {
+                return false;
+            }
             CodePaths = CodePaths.Where(d => d.Id != path.Id).ToList();
             return await Write(CodePaths);
         }
@@ -54,14 +58,25 @@ namespace CodeFactory.Service
 
         public async Task<CodePath> GetPathTree(CodePath path)
         {
-            var parent = CodePaths.FirstOrDefault(d => d.Id == path.ParentId);
+            var parent = CodePaths.Select(d => new CodePath { 
+                Childrens = null, 
+                Id = d.Id, 
+                Name = d.Name, 
+                ParentId = d.ParentId}).ToList().FirstOrDefault(d => d.Id == path.ParentId);
+            if (parent == null) return new CodePath();
             GetPathTreeRecursion(parent);
             return await Task.FromResult(parent);
         }
 
         private void GetPathTreeRecursion(CodePath parent) 
         {
-            var childrens = CodePaths.Where(d => d.ParentId == parent.Id).ToList();
+            var childrens = CodePaths.Where(d => d.ParentId == parent.Id).Select(d => new CodePath
+            {
+                Childrens = null,
+                Id = d.Id,
+                Name = d.Name,
+                ParentId = d.ParentId
+            }).ToList();
             if (childrens.Any()) 
             {
                 parent.Childrens = childrens;
@@ -76,7 +91,8 @@ namespace CodeFactory.Service
             CodeInfos.ForEach(d => {
                 if (d.Id == info.Id) 
                 {
-                    d = info;
+                    d.Title = info.Title;
+                    d.Context = info.Context;
                 }
             });
             return await Write(CodeInfos);
@@ -103,7 +119,7 @@ namespace CodeFactory.Service
             //将序列化的json字符串内容写入Json文件，并且保存
             static void writeJsonFile(string path, string jsonConents)
             {
-                using FileStream fs = new FileStream(path, FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite, FileShare.ReadWrite);
+                using FileStream fs = new FileStream(path, FileMode.Truncate, System.IO.FileAccess.ReadWrite, FileShare.ReadWrite);
                 //如果json文件中有中文数据，可能会出现乱码的现象，那么需要加上如下代码
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
                 using StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("GB2312"));

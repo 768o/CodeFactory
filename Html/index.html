@@ -2,10 +2,18 @@
 <head>
 <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.0.1/js/modal.min.js"></script>
+<script src="https://unpkg.com/wangeditor/dist/wangEditor.min.js"></script>
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
 </head>
+<style>
+	.w-e-text-container{
+		height : 500px !important
+	}
+</style>
 <body>
 <div class="container">
 	<div class="row clearfix">
@@ -13,23 +21,28 @@
 			<ul id="breadcrumb" class="breadcrumb" style="margin-top:10px">
 			</ul>
 			<div class="row clearfix">
-				<div class="col-md-4 column">
+				<div class="col-md-2 column">
 					<ul id="list-unstyled" class="list-unstyled">
+					</ul>
+					<ul id="list-info" style="padding-left: 0px !important;">
+						<li>
+							<a>Lorem ipsum dolor sit amet</a>
+						</li>
 						<li>
 							<a>Lorem ipsum dolor sit amet</a>
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-8 column">
+				<div class="col-md-10 column" style="z-index:1">
 					<h2>
-						Heading
+						<form role="form">
+							 <input type="text" class="form-control" id="InfoName" style="width:500px;float:left;margin-right:10px"/>
+							 <button type="button" class="btn btn-primary" id="insertCodeInfo">E</button>
+						</form>
 					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus.
-					</p>
-					<p>
-						 <a class="btn" href="#">View details »</a>
-					</p>
+					<div id="editor">
+
+					</div>
 				</div>
 			</div>
 			
@@ -69,20 +82,57 @@
 	var insertCodepath = {};
 	var insertCodeinfo = {};
 	
+	const E = window.wangEditor;
+	const editor = new E("#editor");
+	//alert(editor.txt.html());
+
+	// 挂载highlight插件
+	editor.highlight = hljs;
+
+	editor.create();
+	
 	$(function(){
 		SetBreadcrumbs(breadcrumbs);
 		SetChildrens();
 		
-		$("#modal-348295-2").click(function(){
-			insertCodeinfo = {};
-			insertCodeinfo.PathId = $(this).attr("value")
-			$("#myModalLabel").html("内容")
-			type = $(this).attr("type")
-		});
+		$("#insertCodeInfo").attr("disabled", true);
+		editor.disable();
+		$("#InfoName").attr("disabled","disabled");
+		
+		$("#insertCodeInfo").click(function(){
+			if($(this).html() == "E"){
+				$(this).html("S")
+				editor.enable();
+				$('#InfoName').removeAttr('disabled');
+			}else if($(this).html() == "S"){
+				insertCodeinfo.title = $("#InfoName").val();
+				insertCodeinfo.context = editor.txt.html().replace(/&lt;/g,"%@#;");
+				var self = $(this);
+				$.ajax({
+					url: host + "/api/CodeService/CodeInfo",
+					type: "put",
+					dataType : "json",
+					contentType: 'application/json',
+					data: JSON.stringify(insertCodeinfo),
+					success: function(res) {
+						if(res){
+							self.html("E")
+							editor.disable();
+							$("#InfoName").attr("disabled","disabled");
+							$("#info" + insertCodeinfo.id).html(insertCodeinfo.title);
+							var str = JSON.stringify(insertCodeinfo);
+							$("#info" + insertCodeinfo.id).attr("value", str);
+						}
+					}
+				});
+			}
+		})
+		
 		$("#insertCodepath").click(function(){
 			if(type == 1)
 			{
 				insertCodepath.name = $("#InputName").val();
+				$("#insertCodeInfo").attr("disabled", true);
 				$.ajax({
 					url: host + "/api/CodeService/CodePath",
 					type: "post",
@@ -100,9 +150,28 @@
 					}
 				});
 			}
+			if(type == 2)
+			{
+				insertCodeinfo.title = $("#InputName").val();
+				$.ajax({
+					url: host + "/api/CodeService/CodeInfo",
+					type: "post",
+					dataType : "json",
+					contentType: 'application/json',
+					data: JSON.stringify(insertCodeinfo),
+					success: function(res) {
+						if(res){
+							$("#modal-container-348295").modal('hide');
+							SetChildrens();
+							$("#InputName").val("");
+						}
+					}
+				});
+			}
 			if(type == 3)
 			{
 				insertCodepath.name = $("#InputName").val();
+				$("#insertCodeInfo").attr("disabled", true);
 				$.ajax({
 					url: host + "/api/CodeService/CodePath",
 					type: "put",
@@ -114,7 +183,6 @@
 							$("#modal-container-348295").modal('hide');
 							$.get(host + "/api/CodeService/PathTree", function(res){
 								SetChildrens();
-								$("#InputName").val("");
 							});
 						}
 					}
@@ -125,9 +193,51 @@
 	
 	function SetChildrens(){
 		var	id = breadcrumbs[breadcrumbs.length-1].id;
-
+		$("#InputName").val("");
+		$.get(host + "/api/CodeService/CodeInfos?pathId=" + id, function(res){
+			var childrens = res;
+			$("#list-info").empty();
+			$(".editCodeInfo").unbind("click");
+			$(".deleteCodeInfo").unbind("click");
+			$(".enterCodeInfo").unbind("click");
+			for(var i = 0; i < childrens.length; i++)
+			{
+				var str = JSON.stringify(childrens[i]);
+				$("#list-info").append("<li><a id='info" + childrens[i].id + "' class='enterCodeInfo' href='#' value ='" + str + "'>" + childrens[i].title 
+					+ "</a><a class='deleteCodeInfo' type='5' href='#' style='margin-left:10px' value ='" + str + "' >" + "D" + "</a></li>")
+			}
+			$(".enterCodeInfo").click(function(){
+				insertCodeinfo = JSON.parse($(this).attr("value"));
+				$("#InfoName").val(insertCodeinfo.title)
+				if(insertCodeinfo.context){
+					editor.txt.html(insertCodeinfo.context.replace(/%@#;/g,"&lt;"));
+				}else{
+					editor.txt.html("");
+				}
+				editor.disable();
+				$("#InfoName").attr("disabled","disabled");
+				$("#insertCodeInfo").html("E")
+				$("#insertCodeInfo").attr("disabled", false);
+			});
+			$(".deleteCodeInfo").click(function(){
+				insertCodeinfo = JSON.parse($(this).attr("value"));
+				$.ajax({
+					url: host + "/api/CodeService/CodeInfo?id=" + insertCodeinfo.id,
+					type: "delete",
+					dataType : "json",
+					contentType: 'application/json',
+					success: function(res) {
+						if(res){
+							$.get(host + "/api/CodeService/PathTree", function(res){
+								SetChildrens();
+							});
+						}
+					}
+				});
+			});
+		});
+		
 		$.get(host + "/api/CodeService/PathTree?parentId=" + id, function(res){
-		    console.log(res.childrens)
 			var childrens = res.childrens
 			$("#list-unstyled").empty();
 			$(".editCodePath").unbind("click");
@@ -145,6 +255,7 @@
 				breadcrumbs.push(insertCodepath)
 				SetBreadcrumbs(breadcrumbs)
 				SetChildrens()
+				$("#insertCodeInfo").attr("disabled", true);
 			});
 			$(".editCodePath").click(function(){
 				insertCodepath = JSON.parse($(this).attr("value"));
@@ -161,10 +272,9 @@
 					contentType: 'application/json',
 					success: function(res) {
 						if(res){
-							$.get(host + "/api/CodeService/PathTree", function(res){
-								SetChildrens();
-								$("#InputName").val("");
-							});
+							SetChildrens();
+						}else{
+							alert("has childrens or file")
 						}
 					}
 				});
@@ -176,6 +286,7 @@
 		$("#breadcrumb").empty();
 		$(".breadcrumbPath").unbind("click");
 		$("#modal-348295-1").unbind("click");
+		$("#modal-348295-2").unbind("click");
 		var j = 1; 
 		for(var i = 0; i < breadcrumb.length; i++)
 		{
@@ -185,11 +296,15 @@
 				$("#breadcrumb").append("<li><a id='modal-348295-1' href='#modal-container-348295' data-toggle='modal' type='1' value='" + breadcrumbs[i].id + "'>P+</a></li>")
 				$("#breadcrumb").append("<li><a id='modal-348295-2' href='#modal-container-348295' data-toggle='modal' type='2' value='" + breadcrumbs[i].id + "'>F+</a></li>")
 				$("#modal-348295-1").click(function(){
-					console.log("222")
 					insertCodepath = {};
-					console.log($(this).attr("value"))
 					insertCodepath.ParentId = $(this).attr("value")
 					$("#myModalLabel").html("目录")
+					type = $(this).attr("type")
+				});
+				$("#modal-348295-2").click(function(){
+					insertCodeinfo = {};
+					insertCodeinfo.PathId = $(this).attr("value")
+					$("#myModalLabel").html("内容")
 					type = $(this).attr("type")
 				});
 			}
@@ -200,6 +315,7 @@
 		}
 		$(".breadcrumbPath").click(function(){
 			console.log($(this).attr("index"))
+			$("#insertCodeInfo").attr("disabled", true);
 			breadcrumbs = breadcrumb.slice(0, $(this).attr("index"));
 			console.log("+" + JSON.stringify(breadcrumbs))
 			SetBreadcrumbs(breadcrumbs)
